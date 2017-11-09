@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CourseProject</string>
+    <string name="user_success_add">User Succesfully Added!</string>
 </resources>
