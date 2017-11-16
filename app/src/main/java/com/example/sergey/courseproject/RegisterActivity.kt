@@ -2,17 +2,23 @@ package com.example.sergey.courseproject
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.ArrayAdapter
-import android.widget.Chronometer
+import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.sergey.courseproject.entities.User
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
-
-
     private lateinit var mPresenter : RegisterActivityPresenter
+
+    override val spinner: Spinner
+        get() = role_spinner
+
+    override val user: User
+        get() = User(register_email_edit_text.text.toString(),
+                register_password_edit_text.text.toString(),
+                role_spinner.selectedItem.toString())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -20,21 +26,21 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
 
         mPresenter.initializeSpinnerData()
 
-        register_button.setOnClickListener { _ ->  mPresenter.addUser() }
+        register_button.setOnClickListener { _ -> mPresenter.addUser()
+        }
     }
 
     override fun showSuccessToast() {
         Toast.makeText(this, R.string.user_success_add, Toast.LENGTH_SHORT).show()
     }
-
-    override fun getUserData(): User? {
-        val email : String = register_email_edit_text.text.toString()
-        val password : String = register_password_edit_text.text.toString()
-        val role : String = role_spinner.selectedItem.toString()
-        return null
+    override fun showFailMessage() {
+        Toast.makeText(this, R.string.user_fail_add, Toast.LENGTH_SHORT).show()
     }
 
-    override fun getSpinner(): Spinner {
-        return role_spinner
+    override fun cleanInputs() {
+        register_email_edit_text.setText("")
+        register_password_edit_text.setText("")
     }
+
+
 }

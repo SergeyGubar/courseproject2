@@ -9,9 +9,14 @@ import com.example.sergey.courseproject.entities.User
 
 interface RegisterActivityApi {
 
-    fun getUserData() : User?
-
-    fun getSpinner() : Spinner
 
     fun showSuccessToast()
+
+    fun showFailMessage()
+
+    fun cleanInputs()
+
+    val spinner: Spinner
+
+    val user: User
 }
