@@ -7,8 +7,10 @@ import android.provider.BaseColumns;
  */
 
 public class JourneyDbContract implements BaseColumns {
+    public static final String TABLE_NAME = "journeys";
     public static final String COLUMN_ROUTE_NUMBER = "routenumber";
     public static final String COLUMN_COST = "cost";
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_BUS_ID = "busid";
+    public static final String COLUMN_TIMESTAMP = "timestamp";
 }

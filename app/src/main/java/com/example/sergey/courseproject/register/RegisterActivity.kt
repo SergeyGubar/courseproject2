@@ -17,7 +17,7 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
     override val worker: Worker
         get() = Worker(register_email_edit_text.text.toString(),
                 register_password_edit_text.text.toString(),
-                role_spinner.selectedItem.toString())
+                role_spinner.selectedItem.toString().toLowerCase())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

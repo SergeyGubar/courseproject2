@@ -7,6 +7,8 @@ import android.provider.BaseColumns;
  */
 
 public class TicketDbContract implements BaseColumns {
+    public static final String TABLE_NAME = "tickets";
     public static final String COLUMN_JOURNEY_ID = "journeyid";
     public static final String COLUMN_SEAT_NUMBER = "seatnumber";
+    public static final String COLUMN_TIMESTAMP = "timestamp";
 }

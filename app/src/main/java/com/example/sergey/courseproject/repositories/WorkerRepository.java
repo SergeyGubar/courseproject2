@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.example.sergey.courseproject.db.contracts.WorkerDbContract;
 import com.example.sergey.courseproject.entities.Worker;
-import com.example.sergey.courseproject.helpers.SqliteHelper;
+import com.example.sergey.courseproject.helpers.SQLiteHelper;
 
 /**
  * Created by sgubar on 11/17/17.
@@ -18,11 +18,11 @@ public class WorkerRepository {
 
     private static final String TAG = "WorkerRepository";
     private SQLiteDatabase mDb;
-    private SqliteHelper mHelper;
+    private SQLiteHelper mHelper;
 
 
     public WorkerRepository(Context ctx) {
-        mHelper = new SqliteHelper(ctx);
+        mHelper = new SQLiteHelper(ctx);
     }
 
     public long addWorker(Worker user) {
@@ -50,5 +50,27 @@ public class WorkerRepository {
             Log.d(TAG, "addWorker: user wasn't successfully added!");
         }
         return id;
+    }
+
+    public String getWorkerRole(Worker worker) {
+        mDb = mHelper.getReadableDatabase();
+        Cursor workers = mDb.query(
+                WorkerDbContract.TABLE_NAME,
+                null,
+                WorkerDbContract.COLUMN_EMAIL +  " = " + "\"" + worker.getEmail() + "\"" + " AND " +
+                        WorkerDbContract.COLUMN_PASSWORD + " = " + "\"" + worker.getPassword() + "\"",
+                null,
+                null,
+                null,
+                null
+        );
+        String role = "";
+        if (workers.getCount() > 0) {
+            workers.moveToFirst();
+            role = workers.getString(workers.getColumnIndex(WorkerDbContract.COLUMN_ROLE));
+            workers.close();
+        }
+        return role;
+
     }
 }

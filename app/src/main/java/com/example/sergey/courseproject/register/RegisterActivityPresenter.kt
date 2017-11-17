@@ -2,7 +2,6 @@ package com.example.sergey.courseproject
 
 import android.content.Context
 import android.widget.ArrayAdapter
-import com.example.sergey.courseproject.helpers.SqliteHelper
 import com.example.sergey.courseproject.repositories.WorkerRepository
 
 /**
