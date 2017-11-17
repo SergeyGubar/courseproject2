@@ -1,7 +1,7 @@
 package com.example.sergey.courseproject
 
 import android.widget.Spinner
-import com.example.sergey.courseproject.entities.User
+import com.example.sergey.courseproject.entities.Worker
 
 /**
  * Created by sergey on 11/9/17.
@@ -18,5 +18,6 @@ interface RegisterActivityApi {
 
     val spinner: Spinner
 
-    val user: User
+    val worker: Worker
+
 }

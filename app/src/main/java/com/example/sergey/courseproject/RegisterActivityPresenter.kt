@@ -2,18 +2,19 @@ package com.example.sergey.courseproject
 
 import android.content.Context
 import android.widget.ArrayAdapter
-import com.example.sergey.courseproject.db.SqliteHelper
+import com.example.sergey.courseproject.helpers.SqliteHelper
+import com.example.sergey.courseproject.repositories.WorkerRepository
 
 /**
  * Created by sergey on 11/9/17.
  */
 
 class RegisterActivityPresenter(private val mCtx: Context, private val mApi: RegisterActivityApi,
-                                private val mDbHelper: UserHelper = SqliteHelper(mCtx)) {
+                                private val mWorkerRepository : WorkerRepository = WorkerRepository(mCtx)) {
 
     fun addUser() {
-        val user = mApi.user
-        val userId = mDbHelper.addUser(user)
+        val user = mApi.worker
+        val userId = mWorkerRepository.addWorker(user)
         if(userId < 0) {
             mApi.showFailMessage()
         } else {

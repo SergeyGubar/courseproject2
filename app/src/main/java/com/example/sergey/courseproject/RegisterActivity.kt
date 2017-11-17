@@ -5,17 +5,17 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.sergey.courseproject.entities.User
+import com.example.sergey.courseproject.entities.Worker
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
-    private lateinit var mPresenter : RegisterActivityPresenter
+    private lateinit var mPresenter: RegisterActivityPresenter
 
     override val spinner: Spinner
         get() = role_spinner
 
-    override val user: User
-        get() = User(register_email_edit_text.text.toString(),
+    override val worker: Worker
+        get() = Worker(register_email_edit_text.text.toString(),
                 register_password_edit_text.text.toString(),
                 role_spinner.selectedItem.toString())
 
@@ -26,13 +26,15 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
 
         mPresenter.initializeSpinnerData()
 
-        register_button.setOnClickListener { _ -> mPresenter.addUser()
+        register_button.setOnClickListener {
+            mPresenter.addUser()
         }
     }
 
     override fun showSuccessToast() {
         Toast.makeText(this, R.string.user_success_add, Toast.LENGTH_SHORT).show()
     }
+
     override fun showFailMessage() {
         Toast.makeText(this, R.string.user_fail_add, Toast.LENGTH_SHORT).show()
     }
