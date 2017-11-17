@@ -1,7 +1,6 @@
 package com.example.sergey.courseproject.login
 
 import android.content.Context
-
 import com.example.sergey.courseproject.repositories.WorkerRepository
 
 /**
@@ -9,11 +8,20 @@ import com.example.sergey.courseproject.repositories.WorkerRepository
  */
 
 class LoginActivityPresenter(private val mApi: LoginActivityApi, private val mCtx: Context) {
-    private val mWorkerRepository: WorkerRepository
+    private val mWorkerRepository: WorkerRepository = WorkerRepository(mCtx)
 
-    init {
-        mWorkerRepository = WorkerRepository(mCtx)
+    fun logIn() {
+        val role: String = mWorkerRepository.getWorkerRole(mApi.worker)
+
+        when (role.toLowerCase()) {
+            "admin" -> mApi.showToast("admin")
+            "driver" -> mApi.showToast("driver")
+            "user" -> mApi.showToast("user")
+            "cashier" -> mApi.showToast("cashier")
+            else -> mApi.showToast("no such user")
+        }
+
     }
 
-    fun logIn() {}
+
 }

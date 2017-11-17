@@ -1,7 +1,8 @@
-package com.example.sergey.courseproject
+package com.example.sergey.courseproject.register
 
 import android.content.Context
 import android.widget.ArrayAdapter
+import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.repositories.WorkerRepository
 
 /**

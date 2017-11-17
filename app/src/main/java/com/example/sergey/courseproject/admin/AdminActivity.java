@@ -3,6 +3,8 @@ package com.example.sergey.courseproject.admin;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.sergey.courseproject.R;
+
 public class AdminActivity extends AppCompatActivity {
 
     @Override

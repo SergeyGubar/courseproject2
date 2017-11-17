@@ -1,10 +1,10 @@
-package com.example.sergey.courseproject
+package com.example.sergey.courseproject.register
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
+import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.entities.Worker
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -17,7 +17,8 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
     override val worker: Worker
         get() = Worker(register_email_edit_text.text.toString(),
                 register_password_edit_text.text.toString(),
-                role_spinner.selectedItem.toString().toLowerCase())
+                role_spinner.selectedItem.toString().toLowerCase(),
+                register_name_edit_text.text.toString())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

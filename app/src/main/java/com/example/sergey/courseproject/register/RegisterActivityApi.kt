@@ -1,4 +1,4 @@
-package com.example.sergey.courseproject
+package com.example.sergey.courseproject.register
 
 import android.widget.Spinner
 import com.example.sergey.courseproject.entities.Worker
