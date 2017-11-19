@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sergey.courseproject">
+          package="com.example.sergey.courseproject">
 
     <application
         android:allowBackup="true"
@@ -11,15 +11,16 @@
         android:theme="@style/AppTheme">
         <activity android:name=".login.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".register.RegisterActivity">
         </activity>
-        <activity android:name=".admin.AdminActivity"></activity>
+        <activity android:name=".admin.AdminActivity"/>
+        <activity android:name=".station.AddStationActivity">
+        </activity>
     </application>
 
 </manifest>

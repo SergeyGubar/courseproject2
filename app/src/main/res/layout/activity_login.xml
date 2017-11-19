@@ -39,4 +39,14 @@
         android:background="@color/colorPrimaryDark"
         android:layout_marginTop="8dp"
         android:textColor="@android:color/white"/>
+    <Button
+        android:id="@+id/login_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_register_button"
+        android:background="@color/colorPrimaryDark"
+        android:text="Add station"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        />
 </RelativeLayout>

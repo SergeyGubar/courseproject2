@@ -6,24 +6,29 @@ package com.example.sergey.courseproject.entities;
 
 public class Station {
     private int mId;
-    private int mNumberOfPersons;
-    private int mNumberOfBuses;
+    private String mName;
+    private String mCity;
 
-    public Station(int id, int numberOfPersons, int numberOfBuses) {
+    public Station(int id, String name, String city) {
         mId = id;
-        mNumberOfPersons = numberOfPersons;
-        mNumberOfBuses = numberOfBuses;
+        mName = name;
+        mCity = city;
+    }
+
+    public Station(String name, String city) {
+        mName = name;
+        mCity = city;
     }
 
     public int getId() {
         return mId;
     }
 
-    public int getNumberOfPersons() {
-        return mNumberOfPersons;
+    public String getName() {
+        return mName;
     }
 
-    public int getNumberOfBuses() {
-        return mNumberOfBuses;
+    public String getCity() {
+        return mCity;
     }
 }

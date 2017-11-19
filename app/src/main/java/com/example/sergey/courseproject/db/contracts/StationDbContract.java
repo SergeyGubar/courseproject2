@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 
 public class StationDbContract implements BaseColumns {
     public static final String TABLE_NAME = "stations";
-    public static final String COLUMN_NUMBER_OF_PERSONAL = "numberofpersonal";
-    public static final String COLUMN_NUMBER_OF_BUSES = "numberofbuses";
+    public static final String COLUMN_NAME = "stationname";
+    public static final String COLUMN_CITY = "city";
     public static final String COLUMN_TIMESTAMP = "timestamp";
 }

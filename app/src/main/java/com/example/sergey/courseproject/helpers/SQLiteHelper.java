@@ -10,6 +10,7 @@ import com.example.sergey.courseproject.db.contracts.RoutesDbContract;
 import com.example.sergey.courseproject.db.contracts.StationDbContract;
 import com.example.sergey.courseproject.db.contracts.TicketDbContract;
 import com.example.sergey.courseproject.db.contracts.WorkerDbContract;
+import com.example.sergey.courseproject.entities.Station;
 
 /**
  * Created by sergey on 11/9/17.
@@ -77,8 +78,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         final String stationsTableSqlQuery = "CREATE TABLE " +
                 StationDbContract.TABLE_NAME + "( " +
                 StationDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                StationDbContract.COLUMN_NUMBER_OF_BUSES + " INTEGER, " +
-                StationDbContract.COLUMN_NUMBER_OF_PERSONAL + " INTEGER, " +
+                StationDbContract.COLUMN_CITY + " TEXT NOT NULL, " +
+                StationDbContract.COLUMN_NAME + " TEXT NOT NULL, " +
                 StationDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP " +
                 "); ";
         db.execSQL(stationsTableSqlQuery);
@@ -113,7 +114,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + JourneyDbContract.COLUMN_ROUTE_NUMBER + ") REFERENCES " +
                 RoutesDbContract.TABLE_NAME + "(" + RoutesDbContract.COLUMN_NUMBER + ")" +
                 "); ";
-
         db.execSQL(journeysTableSqlQuery);
     }
 
@@ -122,7 +122,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 TicketDbContract.TABLE_NAME + "( " +
                 TicketDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TicketDbContract.COLUMN_JOURNEY_ID + " INTEGER NOT NULL, " +
-                TicketDbContract.COLUMN_SEAT_NUMBER + " INTEGER NOT NULL " +
+                TicketDbContract.COLUMN_SEAT_NUMBER + " INTEGER NOT NULL, " +
                 TicketDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "FOREIGN KEY (" + TicketDbContract._ID+ ") REFERENCES " +
                 JourneyDbContract.TABLE_NAME + "(" + JourneyDbContract._ID + ")" +

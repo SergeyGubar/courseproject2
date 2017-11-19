@@ -30,6 +30,8 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
         register_button.setOnClickListener {
             mPresenter.addUser()
         }
+
+        // TODO: Set station spinner adapter
     }
 
     override fun showSuccessToast() {
@@ -43,6 +45,7 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
     override fun cleanInputs() {
         register_email_edit_text.setText("")
         register_password_edit_text.setText("")
+        register_name_edit_text.setText("")
     }
 
 
