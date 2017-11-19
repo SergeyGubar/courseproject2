@@ -49,7 +49,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 WorkerDbContract.COLUMN_STATION_ID + " INTEGER NOT NULL, " +
                 WorkerDbContract.COLUMN_TELEPHONE + " INTEGER, " +
                 WorkerDbContract.COLUMN_SALARY + " INTEGER, " +
-                WorkerDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP " +
+                WorkerDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (" + WorkerDbContract.COLUMN_STATION_ID + ") REFERENCES " +
+                StationDbContract.TABLE_NAME + "(" + StationDbContract._ID + ")" +
                 "); ";
         db.execSQL(usersTableSqlQuery);
     }
@@ -62,7 +64,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 BusesDbContract.COLUMN_DRIVER_ID + " INTEGER, " +
                 BusesDbContract.COLUMN_SEATS_NUMBER + " INTEGER NOT NULL, " +
                 BusesDbContract.COLUMN_BRAND + " TEXT NOT NULL, " +
-                BusesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP " +
+                BusesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (" + BusesDbContract.COLUMN_DRIVER_ID + ") REFERENCES " +
+                WorkerDbContract.TABLE_NAME + "(" + WorkerDbContract._ID + ")," +
+                "FOREIGN KEY (" + BusesDbContract.COLUMN_STATION_ID + ") REFERENCES " +
+                StationDbContract.TABLE_NAME + "(" + StationDbContract._ID + ")" +
                 "); ";
         db.execSQL(busesTableSqlQuery);
     }
@@ -84,7 +90,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 RoutesDbContract.COLUMN_NUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 RoutesDbContract.COLUMN_START_STATION_ID + " INTEGER NOT NULL, " +
                 RoutesDbContract.COLUMN_END_STATION_ID + " INTEGER NOT NULL, " +
-                RoutesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP " +
+                RoutesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (" + RoutesDbContract.COLUMN_START_STATION_ID + ") REFERENCES " +
+                StationDbContract.TABLE_NAME + "(" + StationDbContract._ID + "), " +
+                "FOREIGN KEY (" + RoutesDbContract.COLUMN_END_STATION_ID + ") REFERENCES " +
+                StationDbContract.TABLE_NAME + "(" + StationDbContract._ID + ")" +
                 "); ";
         db.execSQL(routesTableSqlQuery);
     }
@@ -97,8 +107,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 JourneyDbContract.COLUMN_COST + " INTEGER NOT NULL, " +
                 JourneyDbContract.COLUMN_BUS_ID + " INTEGER NOT NULL, " +
                 JourneyDbContract.COLUMN_DATE + " TEXT NOT NULL, " +
-                JourneyDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP " +
+                JourneyDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (" + JourneyDbContract.COLUMN_BUS_ID + ") REFERENCES " +
+                BusesDbContract.TABLE_NAME + "(" + BusesDbContract._ID + ")," +
+                "FOREIGN KEY (" + JourneyDbContract.COLUMN_ROUTE_NUMBER + ") REFERENCES " +
+                RoutesDbContract.TABLE_NAME + "(" + RoutesDbContract.COLUMN_NUMBER + ")" +
                 "); ";
+
+        db.execSQL(journeysTableSqlQuery);
     }
 
     private void initializeTicketsTable(SQLiteDatabase db) {
@@ -107,7 +123,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 TicketDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TicketDbContract.COLUMN_JOURNEY_ID + " INTEGER NOT NULL, " +
                 TicketDbContract.COLUMN_SEAT_NUMBER + " INTEGER NOT NULL " +
-                TicketDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP " +
+                TicketDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (" + TicketDbContract._ID+ ") REFERENCES " +
+                JourneyDbContract.TABLE_NAME + "(" + JourneyDbContract._ID + ")" +
                 "); ";
         db.execSQL(ticketsSqlQuery);
     }

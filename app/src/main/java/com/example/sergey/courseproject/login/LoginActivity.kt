@@ -31,5 +31,4 @@ class LoginActivity : AppCompatActivity(), LoginActivityApi {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-
 }

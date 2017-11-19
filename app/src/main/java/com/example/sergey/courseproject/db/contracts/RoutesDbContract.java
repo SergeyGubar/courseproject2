@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by sgubar on 11/17/17.
  */
 
-public class RoutesDbContract implements BaseColumns {
+public class RoutesDbContract {
     public static final String TABLE_NAME = "routes";
     public static final String COLUMN_NUMBER = "routenumber";
     public static final String COLUMN_START_STATION_ID = "stationid";
