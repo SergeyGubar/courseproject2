@@ -10,7 +10,6 @@ import com.example.sergey.courseproject.db.contracts.RoutesDbContract;
 import com.example.sergey.courseproject.db.contracts.StationDbContract;
 import com.example.sergey.courseproject.db.contracts.TicketDbContract;
 import com.example.sergey.courseproject.db.contracts.WorkerDbContract;
-import com.example.sergey.courseproject.entities.Station;
 
 /**
  * Created by sergey on 11/9/17.
@@ -135,6 +134,5 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         final String usersUpdateSqlQuery = "DROP TABLE IF EXISTS " + WorkerDbContract.TABLE_NAME;
         db.execSQL(usersUpdateSqlQuery);
     }
-
 
 }

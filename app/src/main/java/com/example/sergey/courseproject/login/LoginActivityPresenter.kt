@@ -1,6 +1,8 @@
 package com.example.sergey.courseproject.login
 
 import android.content.Context
+import android.content.Intent
+import com.example.sergey.courseproject.admin.AdminActivity
 import com.example.sergey.courseproject.repositories.WorkerRepository
 
 /**
@@ -14,7 +16,7 @@ class LoginActivityPresenter(private val mApi: LoginActivityApi, private val mCt
         val role: String = mWorkerRepository.getWorkerRole(mApi.worker)
 
         when (role.toLowerCase()) {
-            "admin" -> mApi.showToast("admin")
+            "admin" -> mCtx.startActivity(Intent(mCtx, AdminActivity::class.java))
             "driver" -> mApi.showToast("driver")
             "user" -> mApi.showToast("user")
             "cashier" -> mApi.showToast("cashier")

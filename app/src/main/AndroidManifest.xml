@@ -21,6 +21,8 @@
         <activity android:name=".admin.AdminActivity"/>
         <activity android:name=".station.AddStationActivity">
         </activity>
+        <activity android:name=".admin.buses.BusesActivity"></activity>
+        <activity android:name=".admin.people.PeopleActivity"></activity>
     </application>
 
 </manifest>
