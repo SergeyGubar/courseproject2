@@ -44,6 +44,7 @@ public class WorkerRepository {
             cv.put(WorkerDbContract.COLUMN_PASSWORD, user.getPassword());
             cv.put(WorkerDbContract.COLUMN_ROLE, user.getRole());
             cv.put(WorkerDbContract.COLUMN_FULL_NAME,user.getFullName());
+            cv.put(WorkerDbContract.COLUMN_STATION_ID, user.getId());
             id = mDb.insert(WorkerDbContract.TABLE_NAME, null, cv);
         }
         usersWithTheSameEmail.close();

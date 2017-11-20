@@ -11,9 +11,9 @@ import com.example.sergey.courseproject.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginActivityApi {
-    private lateinit var mPresenter : LoginActivityPresenter
+    private lateinit var mPresenter: LoginActivityPresenter
 
-    override val worker : Worker
+    override val worker: Worker
         get() = Worker(login_email_edit_text.text.toString(),
                 login_password_edit_text.text.toString())
 
@@ -25,14 +25,13 @@ class LoginActivity : AppCompatActivity(), LoginActivityApi {
             mPresenter.logIn()
         }
 
-        login_add_button.setOnClickListener(
-                {
-                    startActivity(Intent(LoginActivity@this, AddStationActivity::class.java))
-                }
-        )
+        login_add_button.setOnClickListener {
+            startActivity(Intent(LoginActivity@ this, AddStationActivity::class.java))
+        }
+
 
         login_register_button.setOnClickListener {
-            startActivity(Intent(LoginActivity@this, RegisterActivity::class.java))
+            startActivity(Intent(LoginActivity@ this, RegisterActivity::class.java))
         }
     }
 

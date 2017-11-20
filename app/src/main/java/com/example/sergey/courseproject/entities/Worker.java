@@ -31,11 +31,12 @@ public class Worker {
         mPassword = password;
     }
 
-    public Worker(String email, String password, String role, String name) {
+    public Worker(String email, String password, String role, String name, int stationId) {
         mEmail = email;
         mPassword = password;
         mRole = role;
         mFullName = name;
+        mStationId = stationId;
     }
 
     public Worker(String email, String password) {

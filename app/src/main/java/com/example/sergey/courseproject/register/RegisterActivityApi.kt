@@ -16,8 +16,10 @@ interface RegisterActivityApi {
 
     fun cleanInputs()
 
-    val spinner: Spinner
+    val rolesSpinner: Spinner
 
     val worker: Worker
+    
+    val stationsSpinner: Spinner
 
 }

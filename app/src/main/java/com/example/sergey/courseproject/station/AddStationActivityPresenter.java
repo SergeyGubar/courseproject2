@@ -9,16 +9,25 @@ import com.example.sergey.courseproject.repositories.StationRepository;
  * Created by Sergey on 11/19/2017.
  */
 
-public class StationActivityPresenter {
+public class AddStationActivityPresenter {
     private Context mCtx;
     private StationRepository mStationRepository;
-
-    public StationActivityPresenter(Context ctx) {
+    private AddStationActivityApi mApi;
+    public AddStationActivityPresenter(Context ctx, AddStationActivityApi api) {
         mCtx = ctx;
+        mApi = api;
         mStationRepository = new StationRepository(ctx);
     }
 
     public void addStation(Station station) {
-        mStationRepository.addStation(station);
+        long id = mStationRepository.addStation(station);
+
+        if (id < 0) {
+            mApi.showToast("Station add failed!");
+        } else {
+            mApi.showToast("Station with id " + id + " added!");
+            mApi.clearInputs();
+        }
+
     }
 }

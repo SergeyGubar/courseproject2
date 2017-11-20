@@ -11,27 +11,32 @@ import kotlinx.android.synthetic.main.activity_register.*
 class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
     private lateinit var mPresenter: RegisterActivityPresenter
 
-    override val spinner: Spinner
+    override val rolesSpinner: Spinner
         get() = role_spinner
+
+
+    override val stationsSpinner: Spinner
+        get() = stations_spinner
 
     override val worker: Worker
         get() = Worker(register_email_edit_text.text.toString(),
                 register_password_edit_text.text.toString(),
                 role_spinner.selectedItem.toString().toLowerCase(),
-                register_name_edit_text.text.toString())
+                register_name_edit_text.text.toString(),
+                Integer.valueOf(stationsSpinner.selectedItem.toString()))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         mPresenter = RegisterActivityPresenter(this, this)
 
-        mPresenter.initializeSpinnerData()
+        mPresenter.initializeRolesSpinner()
+        mPresenter.initializeStationSpinner()
 
         register_button.setOnClickListener {
             mPresenter.addUser()
         }
 
-        // TODO: Set station spinner adapter
     }
 
     override fun showSuccessToast() {
