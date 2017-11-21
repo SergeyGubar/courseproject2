@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.sergey.courseproject.R;
 import com.example.sergey.courseproject.admin.buses.BusesActivity;
-import com.example.sergey.courseproject.admin.people.PeopleActivity;
+import com.example.sergey.courseproject.admin.people.WorkerActivity;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class AdminActivity extends AppCompatActivity {
         findViewById(R.id.people_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminActivity.this, PeopleActivity.class));
+                startActivity(new Intent(AdminActivity.this, WorkerActivity.class));
             }
         });
 

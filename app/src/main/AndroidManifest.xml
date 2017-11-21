@@ -22,7 +22,7 @@
         <activity android:name=".station.AddStationActivity">
         </activity>
         <activity android:name=".admin.buses.BusesActivity"></activity>
-        <activity android:name=".admin.people.PeopleActivity"></activity>
+        <activity android:name=".admin.people.WorkerActivity"></activity>
     </application>
 
 </manifest>

@@ -10,6 +10,9 @@ import com.example.sergey.courseproject.db.contracts.WorkerDbContract;
 import com.example.sergey.courseproject.entities.Worker;
 import com.example.sergey.courseproject.helpers.SQLiteHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sgubar on 11/17/17.
  */
@@ -43,8 +46,8 @@ public class WorkerRepository {
             cv.put(WorkerDbContract.COLUMN_EMAIL, user.getEmail());
             cv.put(WorkerDbContract.COLUMN_PASSWORD, user.getPassword());
             cv.put(WorkerDbContract.COLUMN_ROLE, user.getRole());
-            cv.put(WorkerDbContract.COLUMN_FULL_NAME,user.getFullName());
-            cv.put(WorkerDbContract.COLUMN_STATION_ID, user.getId());
+            cv.put(WorkerDbContract.COLUMN_FULL_NAME, user.getFullName());
+            cv.put(WorkerDbContract.COLUMN_STATION_ID, user.getStationId());
             id = mDb.insert(WorkerDbContract.TABLE_NAME, null, cv);
         }
         usersWithTheSameEmail.close();
@@ -59,7 +62,7 @@ public class WorkerRepository {
         Cursor workers = mDb.query(
                 WorkerDbContract.TABLE_NAME,
                 null,
-                WorkerDbContract.COLUMN_EMAIL +  " = " + "\"" + worker.getEmail() + "\"" + " AND " +
+                WorkerDbContract.COLUMN_EMAIL + " = " + "\"" + worker.getEmail() + "\"" + " AND " +
                         WorkerDbContract.COLUMN_PASSWORD + " = " + "\"" + worker.getPassword() + "\"",
                 null,
                 null,
@@ -73,6 +76,34 @@ public class WorkerRepository {
             workers.close();
         }
         return role;
+    }
 
+    public List<Worker> getAllWorkers() {
+        mDb = mHelper.getReadableDatabase();
+        List<Worker> result = new ArrayList<>();
+        Cursor data = mDb.query(WorkerDbContract.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+        while(data.moveToNext()) {
+            Worker worker = new Worker(
+                    data.getInt(data.getColumnIndex(WorkerDbContract._ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_FULL_NAME)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_PERSONAL_DATA)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_SALARY)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_EXPERIENCE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_TELEPHONE)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_STATION_ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_ROLE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_EMAIL)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_PASSWORD))
+            );
+            result.add(worker);
+        }
+        return result;
     }
 }

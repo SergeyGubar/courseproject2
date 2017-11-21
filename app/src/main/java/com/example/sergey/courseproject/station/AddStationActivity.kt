@@ -19,6 +19,7 @@ class AddStationActivity : AppCompatActivity(), AddStationActivityApi {
                     station_add_city_edit_text.text.toString())
             )
         }
+
     }
 
     override fun showToast(message: String) {

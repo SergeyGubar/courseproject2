@@ -1,6 +1,7 @@
 package com.example.sergey.courseproject.register
 
 import android.content.Context
+import android.util.Log
 import android.widget.ArrayAdapter
 import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.repositories.StationRepository
@@ -16,9 +17,9 @@ class RegisterActivityPresenter(private val mCtx: Context, private val mApi: Reg
                                 private val mStationRepository : StationRepository = StationRepository(mCtx)) {
 
     fun addUser() {
-        val user = mApi.worker
-        val userId = mWorkerRepository.addWorker(user)
-        if(userId < 0) {
+        val worker = mApi.worker
+        val workerId = mWorkerRepository.addWorker(worker)
+        if(workerId < 0) {
             mApi.showFailMessage()
         } else {
             mApi.showSuccessToast()
