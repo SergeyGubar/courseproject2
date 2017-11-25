@@ -1,6 +1,7 @@
-package com.example.sergey.courseproject.admin.people;
+package com.example.sergey.courseproject.admin.workers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +17,24 @@ import java.util.List;
  * Created by sgubar on 11/20/17.
  */
 
-public class WorkerRecyclerAdapter extends RecyclerView.Adapter<WorkerRecyclerAdapter.WorkerViewHolder> {
+public class WorkersRecyclerAdapter extends RecyclerView.Adapter<WorkersRecyclerAdapter.WorkerViewHolder> {
 
 
     private Context mCtx;
     private List<Worker> mData;
-
-    public WorkerRecyclerAdapter(Context ctx, List<Worker> data) {
+    private static final String TAG = "WorkersRecyclerAdapter";
+    private DeleteCallback mDeleteCallback;
+    public WorkersRecyclerAdapter(Context ctx, List<Worker> data, DeleteCallback callback) {
         mCtx = ctx;
         mData = data;
+        mDeleteCallback = callback;
     }
 
     @Override
     public WorkerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View v = inflater.inflate(R.layout.worker_item, parent, false);
+        v.setLongClickable(true);
         return new WorkerViewHolder(v);
     }
 
@@ -44,7 +48,7 @@ public class WorkerRecyclerAdapter extends RecyclerView.Adapter<WorkerRecyclerAd
         return mData.size();
     }
 
-    class WorkerViewHolder extends RecyclerView.ViewHolder {
+    class WorkerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         private TextView mStationIdTextView;
         private TextView mFullNameTextView;
@@ -52,6 +56,8 @@ public class WorkerRecyclerAdapter extends RecyclerView.Adapter<WorkerRecyclerAd
 
         public WorkerViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             mStationIdTextView = itemView.findViewById(R.id.worker_station_text_view);
             mFullNameTextView = itemView.findViewById(R.id.worker_full_name_text_view);
             mWorkerIdTextView = itemView.findViewById(R.id.worker_id_text_view);
@@ -63,5 +69,18 @@ public class WorkerRecyclerAdapter extends RecyclerView.Adapter<WorkerRecyclerAd
             mWorkerIdTextView.setText(String.valueOf(worker.getId()));
         }
 
+        @Override
+        public void onClick(View view) {
+            Worker worker = mData.get(getAdapterPosition());
+            Intent intent = WorkerEditActivity.makeIntent(mCtx,
+                    worker);
+            mCtx.startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            mDeleteCallback.deleteWorker(mData.get(getAdapterPosition()).getId());
+            return false;
+        }
     }
 }

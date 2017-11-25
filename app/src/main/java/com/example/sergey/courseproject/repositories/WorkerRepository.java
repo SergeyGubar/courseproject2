@@ -57,6 +57,13 @@ public class WorkerRepository {
         return id;
     }
 
+    public boolean deleteWorker(long id) {
+        mDb = mHelper.getWritableDatabase();
+        return mDb.delete(WorkerDbContract.TABLE_NAME,
+                WorkerDbContract._ID + " = " + id,
+                null) > 0;
+    }
+
     public String getWorkerRole(Worker worker) {
         mDb = mHelper.getReadableDatabase();
         Cursor workers = mDb.query(
@@ -105,6 +112,26 @@ public class WorkerRepository {
             result.add(worker);
         }
         return result;
+    }
+
+    public boolean editWorker(Worker worker) {
+        mDb = mHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(WorkerDbContract.COLUMN_EMAIL, worker.getEmail());
+        cv.put(WorkerDbContract.COLUMN_PASSWORD, worker.getPassword());
+        cv.put(WorkerDbContract.COLUMN_ROLE, worker.getRole());
+        cv.put(WorkerDbContract.COLUMN_FULL_NAME, worker.getFullName());
+        cv.put(WorkerDbContract.COLUMN_STATION_ID, worker.getStationId());
+        cv.put(WorkerDbContract.COLUMN_EXPERIENCE, worker.getYearsExperience());
+        cv.put(WorkerDbContract.COLUMN_SALARY, worker.getSalary());
+        cv.put(WorkerDbContract.COLUMN_TELEPHONE, worker.getTelephoneNumber());
+        cv.put(WorkerDbContract.COLUMN_PERSONAL_DATA, worker.getPersonalData());
+        boolean wereColumnsUpdated = mDb.update(WorkerDbContract.TABLE_NAME,
+                cv,
+                WorkerDbContract._ID + " = " + worker.getId(),
+                null
+                ) > 0 ;
+        return wereColumnsUpdated;
     }
 
     public List<Worker> getAllWorkers() {

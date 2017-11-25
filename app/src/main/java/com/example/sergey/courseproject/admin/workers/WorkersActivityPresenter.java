@@ -1,4 +1,4 @@
-package com.example.sergey.courseproject.admin.people;
+package com.example.sergey.courseproject.admin.workers;
 
 import android.content.Context;
 
@@ -11,19 +11,27 @@ import java.util.List;
  * Created by sgubar on 11/20/17.
  */
 
-public class WorkerActivityPresenter {
+public class WorkersActivityPresenter {
     private Context mCtx;
-    private WorkerActivityApi mApi;
+    private WorkersActivityApi mApi;
     private WorkerRepository mWorkerRepository;
 
-    public WorkerActivityPresenter(Context ctx, WorkerActivityApi api) {
+    public WorkersActivityPresenter(Context ctx, WorkersActivityApi api) {
         mCtx = ctx;
-        mApi = api;
         mWorkerRepository = new WorkerRepository(ctx);
+        mApi = api;
     }
 
     public List<Worker> getWorkers() {
         return mWorkerRepository.getAllWorkers();
+    }
+
+    public void deleteWorker(long id) {
+        if (mWorkerRepository.deleteWorker(id)) {
+            mApi.showToast("Delete success");
+        } else {
+            mApi.showToast("Delete fail");
+        }
     }
 
 }
