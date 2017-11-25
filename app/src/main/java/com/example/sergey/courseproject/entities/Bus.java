@@ -7,14 +7,14 @@ package com.example.sergey.courseproject.entities;
 public class Bus {
     private int mId;
     private int mStationId;
-    private int mWorkerId;
+    private int mDriverId;
     private int mNumberOfSeats;
     private String mBrand;
 
     public Bus(int id, int stationId, int workerId, int numberOfSeats, String brand) {
         mId = id;
         mStationId = stationId;
-        mWorkerId = workerId;
+        mDriverId = workerId;
         mNumberOfSeats = numberOfSeats;
         mBrand = brand;
     }
@@ -27,8 +27,8 @@ public class Bus {
         return mStationId;
     }
 
-    public int getWorkerId() {
-        return mWorkerId;
+    public int getDriverId() {
+        return mDriverId;
     }
 
     public int getNumberOfSeats() {

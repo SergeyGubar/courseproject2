@@ -20,14 +20,15 @@ public class WorkerActivity extends AppCompatActivity implements WorkerActivityA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_people);
+        setContentView(R.layout.worker_recycler);
         mPresenter = new WorkerActivityPresenter(this, this);
-        mRecyclerView = findViewById(R.id.people_recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         WorkerRecyclerAdapter adapter = new WorkerRecyclerAdapter(this, mPresenter.getWorkers());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(adapter);
+
     }
 
 
