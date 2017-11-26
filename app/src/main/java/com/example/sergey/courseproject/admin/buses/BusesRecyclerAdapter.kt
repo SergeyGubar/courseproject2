@@ -14,15 +14,19 @@ import com.example.sergey.courseproject.repositories.BusesRepository
  * Created by Sergey on 11/25/2017.
  */
 class BusesRecyclerAdapter(private val mCtx: Context,
-                           private val mInflater: LayoutInflater = LayoutInflater.from(mCtx)) : RecyclerView.Adapter<BusesRecyclerAdapter.BusViewHolder>() {
+                           private val mDeleteCallback: DeleteBusCallback,
+                           private val mEditCallback: EditBusCallback)
+    : RecyclerView.Adapter<BusesRecyclerAdapter.BusViewHolder>() {
 
 
     private val repository: BusesRepository
     private val data: List<Bus>
+    private val mInflater : LayoutInflater
 
     init {
         repository = BusesRepository(mCtx)
         data = repository.allBuses
+        mInflater = LayoutInflater.from(mCtx)
     }
 
 
@@ -37,12 +41,19 @@ class BusesRecyclerAdapter(private val mCtx: Context,
     override fun onBindViewHolder(holder: BusViewHolder, position: Int) = holder.bind(data[position])
 
     inner class BusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val busStationTextView : TextView = itemView.findViewById(R.id.bus_station_text_view)
-        private val busDriverId : TextView = itemView.findViewById(R.id.bus_driver_text_view)
-        private val busBrandTextView : TextView = itemView.findViewById(R.id.bus_brand_text_view)
+        private val busStationTextView: TextView = itemView.findViewById(R.id.bus_station_text_view)
+        private val busDriverId: TextView = itemView.findViewById(R.id.bus_driver_text_view)
+        private val busBrandTextView: TextView = itemView.findViewById(R.id.bus_brand_text_view)
 
         fun bind(bus: Bus) {
-            busStationTextView.text = bus.id.toString()
+            itemView.setOnClickListener( {
+                mEditCallback.editBus(bus)
+            })
+            itemView.setOnLongClickListener( {
+                mDeleteCallback.deleteBus(bus)
+                true
+            })
+            busStationTextView.text = bus.stationId.toString()
             busDriverId.text = bus.driverId.toString()
             busBrandTextView.text = bus.brand.toString()
         }

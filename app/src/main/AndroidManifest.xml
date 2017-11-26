@@ -22,12 +22,13 @@
         <activity android:name=".station.AddStationActivity">
         </activity>
         <activity android:name=".admin.buses.BusesActivity"/>
-        <activity android:name=".admin.people.WorkerActivity"/>
-        <activity android:name=".admin.people.AddWorkerActivity">
-        </activity>
+        <activity android:name=".admin.workers.WorkersActivity"/>
         <activity android:name=".admin.buses.EditBusActivity">
         </activity>
         <activity android:name=".admin.buses.AddBusActivity">
+        </activity>
+        <activity android:name=".admin.workers.WorkerEditActivity">
+
         </activity>
     </application>
 

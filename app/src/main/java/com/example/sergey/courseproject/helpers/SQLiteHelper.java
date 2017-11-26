@@ -61,12 +61,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 BusesDbContract.TABLE_NAME + "( " +
                 BusesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 BusesDbContract.COLUMN_STATION_ID + " INTEGER, " +
-                BusesDbContract.COLUMN_DRIVER_ID + " INTEGER, " +
-                BusesDbContract.COLUMN_SEATS_NUMBER + " INTEGER NOT NULL, " +
+                BusesDbContract.COLUMN_DRIVER_ID + " INTEGER REFERENCES " + WorkerDbContract.TABLE_NAME +
+                "(" + WorkerDbContract._ID + ")" + " ON DELETE SET NULL," +
+                BusesDbContract.COLUMN_SEATS_NUMBER + " INTEGER, " +
                 BusesDbContract.COLUMN_BRAND + " TEXT NOT NULL, " +
                 BusesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-                "FOREIGN KEY (" + BusesDbContract.COLUMN_DRIVER_ID + ") REFERENCES " +
-                WorkerDbContract.TABLE_NAME + "(" + WorkerDbContract._ID + ")," +
+                /*"FOREIGN KEY (" + BusesDbContract.COLUMN_DRIVER_ID + ") REFERENCES " +
+                WorkerDbContract.TABLE_NAME + "(" + WorkerDbContract._ID + ") ON DELETE SET NULL,"  +*/
                 "FOREIGN KEY (" + BusesDbContract.COLUMN_STATION_ID + ") REFERENCES " +
                 StationDbContract.TABLE_NAME + "(" + StationDbContract._ID + ")" +
                 "); ";

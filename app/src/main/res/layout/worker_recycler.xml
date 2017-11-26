@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:orientation="vertical"
     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:hint="Station"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <Spinner
+            android:id="@+id/role_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </Spinner>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Find"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:text="ID"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Station"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/worker_role_text_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Role"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/worker_full_name_text_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Full name"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,4 +69,4 @@
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>

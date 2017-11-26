@@ -52,6 +52,40 @@ public class BusesRepository {
         return result;
     }
 
+    public Bus getBusById(int id) {
+        mDb = mHelper.getReadableDatabase();
+
+        Cursor busCursor = mDb.query(BusesDbContract.TABLE_NAME,
+                null,
+                BusesDbContract._ID +  " = " + id,
+                null,
+                null,
+                null,
+                null);
+
+        busCursor.moveToFirst();
+        Bus bus = new Bus(
+                busCursor.getInt(busCursor.getColumnIndex(BusesDbContract._ID)),
+                busCursor.getInt(busCursor.getColumnIndex(BusesDbContract.COLUMN_STATION_ID)),
+                busCursor.getInt(busCursor.getColumnIndex(BusesDbContract.COLUMN_DRIVER_ID)),
+                busCursor.getInt(busCursor.getColumnIndex(BusesDbContract.COLUMN_SEATS_NUMBER)),
+                busCursor.getString(busCursor.getColumnIndex(BusesDbContract.COLUMN_BRAND))
+        );
+
+        busCursor.close();
+
+        return bus;
+    }
+
+    public boolean deleteBus(Bus bus) {
+        mDb = mHelper.getWritableDatabase();
+
+        return mDb.delete(BusesDbContract.TABLE_NAME,
+                BusesDbContract._ID + " = " + bus.getId(),
+                null) > 0;
+
+    }
+
     public long addBus(Bus bus) {
         mDb = mHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();

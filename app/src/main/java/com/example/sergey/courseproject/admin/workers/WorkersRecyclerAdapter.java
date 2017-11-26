@@ -43,6 +43,11 @@ public class WorkersRecyclerAdapter extends RecyclerView.Adapter<WorkersRecycler
         holder.bind(mData.get(position));
     }
 
+    public void swapData(List<Worker> newData) {
+        mData = newData;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mData.size();
@@ -53,6 +58,7 @@ public class WorkersRecyclerAdapter extends RecyclerView.Adapter<WorkersRecycler
         private TextView mStationIdTextView;
         private TextView mFullNameTextView;
         private TextView mWorkerIdTextView;
+        private TextView mWorkerRoleTextView;
 
         public WorkerViewHolder(View itemView) {
             super(itemView);
@@ -61,12 +67,14 @@ public class WorkersRecyclerAdapter extends RecyclerView.Adapter<WorkersRecycler
             mStationIdTextView = itemView.findViewById(R.id.worker_station_text_view);
             mFullNameTextView = itemView.findViewById(R.id.worker_full_name_text_view);
             mWorkerIdTextView = itemView.findViewById(R.id.worker_id_text_view);
+            mWorkerRoleTextView = itemView.findViewById(R.id.worker_role_text_view);
         }
 
         public void bind(Worker worker) {
             mStationIdTextView.setText(String.valueOf(worker.getStationId()));
             mFullNameTextView.setText(String.valueOf(worker.getFullName()));
             mWorkerIdTextView.setText(String.valueOf(worker.getId()));
+            mWorkerRoleTextView.setText(String.valueOf(worker.getRole()));
         }
 
         @Override

@@ -18,31 +18,32 @@ public class WorkersActivity extends AppCompatActivity implements DeleteCallback
     private RecyclerView mRecyclerView;
     private WorkersActivityPresenter mPresenter;
     private static final String TAG = "WorkersActivity";
-
+    private WorkersRecyclerAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_people);
+        setContentView(R.layout.worker_recycler);
         mPresenter = new WorkersActivityPresenter(this, this);
-        mRecyclerView = findViewById(R.id.people_recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
-        WorkersRecyclerAdapter adapter = new WorkersRecyclerAdapter(this, mPresenter.getWorkers(), this);
+        mAdapter = new WorkersRecyclerAdapter(this, mPresenter.getWorkers(), this);
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mRecyclerView.setAdapter(new WorkersRecyclerAdapter(this, mPresenter.getWorkers(), this));
-        Log.d(TAG, "onResume: Adapter notified");
+        mAdapter.swapData(mPresenter.getWorkers());
     }
+
 
     @Override
     public void deleteWorker(long id) {
         mPresenter.deleteWorker(id);
+        mAdapter.swapData(mPresenter.getWorkers());
     }
 
     @Override
