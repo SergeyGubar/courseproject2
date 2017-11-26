@@ -18,7 +18,7 @@ class AddBusActivityPresenter(private val context: Context) {
     private val busesRepository = BusesRepository(context)
     fun getStations() : ArrayList<CharSequence> = stationsRepository.stationsNames
 
-    fun getDrivers() : List<Worker> = workersRepository.getWorkersWithRole("driver")
+    fun getDrivers() : List<Worker> = workersRepository.getWorkersWithRole("driver", null)
 
     fun addBus(bus : Bus) {
         if(busesRepository.addBus(bus) < 0)  {

@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.sergey.courseproject.R
+import com.example.sergey.courseproject.entities.Bus
 import com.example.sergey.courseproject.repositories.BusesRepository
 import kotlinx.android.synthetic.main.activity_edit_bus.*
 
 class EditBusActivity : AppCompatActivity() {
 
-    val busRepository : BusesRepository by lazy {
+    private val busRepository : BusesRepository by lazy {
         BusesRepository(this)
     }
 
@@ -25,6 +26,15 @@ class EditBusActivity : AppCompatActivity() {
         bus_number_of_seats_edit_text.setText(bus.numberOfSeats.toString())
         bus_station_edit_text.setText(bus.stationId.toString())
         bus_brand_edit_text.setText(bus.brand)
+
+        save_changes_button.setOnClickListener {
+            busRepository.updateBus(Bus(bus_id_edit_text.text.toString().toInt(),
+                    bus_station_edit_text.text.toString().toInt(),
+                    bus_driver_id_edit_text.text.toString().toInt(),
+                    bus_number_of_seats_edit_text.text.toString().toInt(),
+                    bus_brand_edit_text.text.toString()))
+            Toast.makeText(this, "Bus updated!", Toast.LENGTH_SHORT).show()
+        }
 
     }
 

@@ -45,11 +45,27 @@ public class BusesRepository {
                     buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_DRIVER_ID)),
                     buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_SEATS_NUMBER)),
                     buses.getString(buses.getColumnIndex(BusesDbContract.COLUMN_BRAND))
-                    );
+            );
             result.add(bus);
         }
         buses.close();
         return result;
+    }
+
+    public void updateBus(Bus bus) {
+        long id = bus.getId();
+        ContentValues cv = new ContentValues();
+        cv.put(BusesDbContract._ID, id);
+        cv.put(BusesDbContract.COLUMN_STATION_ID, bus.getStationId());
+        cv.put(BusesDbContract.COLUMN_DRIVER_ID, bus.getDriverId());
+        cv.put(BusesDbContract.COLUMN_SEATS_NUMBER, bus.getNumberOfSeats());
+        cv.put(BusesDbContract.COLUMN_BRAND, bus.getBrand());
+        mDb = mHelper.getWritableDatabase();
+        mDb.update(BusesDbContract.TABLE_NAME,
+                cv,
+                BusesDbContract._ID + " = " + id,
+                null
+        );
     }
 
     public Bus getBusById(int id) {
@@ -57,7 +73,7 @@ public class BusesRepository {
 
         Cursor busCursor = mDb.query(BusesDbContract.TABLE_NAME,
                 null,
-                BusesDbContract._ID +  " = " + id,
+                BusesDbContract._ID + " = " + id,
                 null,
                 null,
                 null,

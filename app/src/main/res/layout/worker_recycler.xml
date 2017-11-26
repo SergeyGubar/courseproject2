@@ -5,26 +5,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
+    android:padding="16dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
-            android:hint="Station"
+            android:id="@+id/station_filter_edit_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:hint="Station"/>
+
         <Spinner
             android:id="@+id/role_spinner"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
         </Spinner>
+
         <Button
+            android:id="@+id/filter_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -35,31 +40,52 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal">
-        <TextView
+
+        <Spinner
+            android:id="@+id/order_by_spinner"
             android:layout_width="0dp"
-            android:text="ID"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent"/>
+            android:text="Clear filters"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Station"
-            android:layout_height="match_parent"/>
+            android:text="ID"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Station"/>
+
         <TextView
             android:id="@+id/worker_role_text_view"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Role"
-            android:layout_height="match_parent"/>
+            android:text="Role"/>
+
         <TextView
             android:id="@+id/worker_full_name_text_view"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Full name"
-            android:layout_height="match_parent"/>
+            android:text="Full name"/>
     </LinearLayout>
-
 
 
     <android.support.v7.widget.RecyclerView

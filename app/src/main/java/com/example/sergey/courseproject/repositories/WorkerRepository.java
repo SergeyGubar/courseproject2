@@ -85,8 +85,9 @@ public class WorkerRepository {
         return role;
     }
 
-    public List<Worker> getWorkersWithRole(String role) {
+    public List<Worker> getWorkersWithRole(String role, String order) {
         mDb = mHelper.getReadableDatabase();
+
         List<Worker> result = new ArrayList<>();
         Cursor data = mDb.query(WorkerDbContract.TABLE_NAME,
                 null,
@@ -94,7 +95,7 @@ public class WorkerRepository {
                 null,
                 null,
                 null,
-                null,
+                order,
                 null);
         while (data.moveToNext()) {
             Worker worker = new Worker(
@@ -111,6 +112,7 @@ public class WorkerRepository {
             );
             result.add(worker);
         }
+        data.close();
         return result;
     }
 
@@ -130,11 +132,11 @@ public class WorkerRepository {
                 cv,
                 WorkerDbContract._ID + " = " + worker.getId(),
                 null
-                ) > 0 ;
+        ) > 0;
         return wereColumnsUpdated;
     }
 
-    public List<Worker> getAllWorkers() {
+    public List<Worker> getAllWorkers(String order) {
         mDb = mHelper.getReadableDatabase();
         List<Worker> result = new ArrayList<>();
         Cursor data = mDb.query(WorkerDbContract.TABLE_NAME,
@@ -143,7 +145,7 @@ public class WorkerRepository {
                 null,
                 null,
                 null,
-                null,
+                order,
                 null);
         while (data.moveToNext()) {
             Worker worker = new Worker(
@@ -160,6 +162,69 @@ public class WorkerRepository {
             );
             result.add(worker);
         }
+        return result;
+    }
+
+    public List<Worker> getWorkersWithRoleAndStation(String role, String orderByFilter, String station) {
+        mDb = mHelper.getReadableDatabase();
+
+        List<Worker> result = new ArrayList<>();
+        Cursor data = mDb.query(WorkerDbContract.TABLE_NAME,
+                null,
+                WorkerDbContract.COLUMN_ROLE + " = " + "\"" + role + "\""
+                        + " AND " + WorkerDbContract.COLUMN_STATION_ID + " = " + Integer.valueOf(station),
+                null,
+                null,
+                null,
+                orderByFilter,
+                null);
+        while (data.moveToNext()) {
+            Worker worker = new Worker(
+                    data.getInt(data.getColumnIndex(WorkerDbContract._ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_FULL_NAME)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_PERSONAL_DATA)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_SALARY)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_EXPERIENCE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_TELEPHONE)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_STATION_ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_ROLE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_EMAIL)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_PASSWORD))
+            );
+            result.add(worker);
+        }
+        data.close();
+        return result;
+    }
+
+    public List<Worker> getWorkersWithStation(String orderByFilter, String station) {
+        mDb = mHelper.getReadableDatabase();
+
+        List<Worker> result = new ArrayList<>();
+        Cursor data = mDb.query(WorkerDbContract.TABLE_NAME,
+                null,
+                WorkerDbContract.COLUMN_STATION_ID + " = " + Integer.valueOf(station),
+                null,
+                null,
+                null,
+                orderByFilter,
+                null);
+        while (data.moveToNext()) {
+            Worker worker = new Worker(
+                    data.getInt(data.getColumnIndex(WorkerDbContract._ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_FULL_NAME)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_PERSONAL_DATA)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_SALARY)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_EXPERIENCE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_TELEPHONE)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_STATION_ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_ROLE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_EMAIL)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_PASSWORD))
+            );
+            result.add(worker);
+        }
+        data.close();
         return result;
     }
 }
