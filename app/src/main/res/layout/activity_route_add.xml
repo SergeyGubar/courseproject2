@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/start_station_spinner"
+        android:text="Start station" />
+
+    <Spinner
+        android:id="@+id/start_station_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/end_station_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_station_spinner"
+        android:text="End station" />
+
+    <Spinner
+        android:id="@+id/end_station_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/end_station_text_view"
+        android:layout_marginTop="8dp">
+
+    </Spinner>
+
+    <EditText
+        android:hint="Number"
+        android:id="@+id/route_number_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/end_station_spinner"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/route_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/route_number_edit_text"
+        android:text="Add" />
+</RelativeLayout>

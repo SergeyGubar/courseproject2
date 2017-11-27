@@ -4,7 +4,6 @@ import android.content.Context
 import android.widget.Toast
 import com.example.sergey.courseproject.entities.Bus
 import com.example.sergey.courseproject.entities.Worker
-import com.example.sergey.courseproject.helpers.SQLiteHelper
 import com.example.sergey.courseproject.repositories.BusesRepository
 import com.example.sergey.courseproject.repositories.StationRepository
 import com.example.sergey.courseproject.repositories.WorkerRepository
@@ -16,7 +15,7 @@ class AddBusActivityPresenter(private val context: Context) {
     private val stationsRepository = StationRepository(context)
     private val workersRepository = WorkerRepository(context)
     private val busesRepository = BusesRepository(context)
-    fun getStations() : ArrayList<CharSequence> = stationsRepository.stationsNames
+    fun getStations() : ArrayList<CharSequence> = stationsRepository.stationIds
 
     fun getDrivers() : List<Worker> = workersRepository.getWorkersWithRole("driver")
 

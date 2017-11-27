@@ -3,6 +3,7 @@ package com.example.sergey.courseproject.login
 import android.content.Context
 import android.content.Intent
 import com.example.sergey.courseproject.admin.AdminActivity
+import com.example.sergey.courseproject.cashier.CashierActivity
 import com.example.sergey.courseproject.repositories.WorkerRepository
 
 /**
@@ -19,7 +20,7 @@ class LoginActivityPresenter(private val mApi: LoginActivityApi, private val mCt
             "admin" -> mCtx.startActivity(Intent(mCtx, AdminActivity::class.java))
             "driver" -> mApi.showToast("driver")
             "user" -> mApi.showToast("user")
-            "cashier" -> mApi.showToast("cashier")
+            "cashier" -> mCtx.startActivity(Intent(mCtx, CashierActivity::class.java))
             else -> mApi.showToast("no such user")
         }
 

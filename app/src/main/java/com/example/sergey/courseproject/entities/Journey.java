@@ -38,4 +38,27 @@ public class Journey {
     public int getBusId() {
         return mBusId;
     }
+
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public Journey() {
+    }
+
+    public void setRoute(int route) {
+        mRoute = route;
+    }
+
+    public void setCost(int cost) {
+        mCost = cost;
+    }
+
+    public void setDate(String date) {
+        mDate = date;
+    }
+
+    public void setBusId(int busId) {
+        mBusId = busId;
+    }
 }

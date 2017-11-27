@@ -16,20 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".register.RegisterActivity">
-        </activity>
-        <activity android:name=".admin.AdminActivity"/>
-        <activity android:name=".station.AddStationActivity">
-        </activity>
-        <activity android:name=".admin.buses.BusesActivity"/>
-        <activity android:name=".admin.workers.WorkersActivity"/>
-        <activity android:name=".admin.buses.EditBusActivity">
-        </activity>
-        <activity android:name=".admin.buses.AddBusActivity">
-        </activity>
-        <activity android:name=".admin.workers.WorkerEditActivity">
-
-        </activity>
+        <activity android:name=".register.RegisterActivity" />
+        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".station.AddStationActivity" />
+        <activity android:name=".admin.buses.BusesActivity" />
+        <activity android:name=".admin.workers.WorkersActivity" />
+        <activity android:name=".admin.buses.EditBusActivity" />
+        <activity android:name=".admin.buses.AddBusActivity" />
+        <activity android:name=".admin.workers.WorkerEditActivity" />
+        <activity android:name=".cashier.CashierActivity" />
+        <activity android:name=".cashier.JourneyAddActivity" />
+        <activity android:name=".cashier.RouteAddActivity"></activity>
     </application>
 
 </manifest>

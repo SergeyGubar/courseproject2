@@ -66,8 +66,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 BusesDbContract.COLUMN_SEATS_NUMBER + " INTEGER, " +
                 BusesDbContract.COLUMN_BRAND + " TEXT NOT NULL, " +
                 BusesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-                /*"FOREIGN KEY (" + BusesDbContract.COLUMN_DRIVER_ID + ") REFERENCES " +
-                WorkerDbContract.TABLE_NAME + "(" + WorkerDbContract._ID + ") ON DELETE SET NULL,"  +*/
                 "FOREIGN KEY (" + BusesDbContract.COLUMN_STATION_ID + ") REFERENCES " +
                 StationDbContract.TABLE_NAME + "(" + StationDbContract._ID + ")" +
                 "); ";
@@ -88,7 +86,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private void initializeRoutesTable(SQLiteDatabase db) {
         final String routesTableSqlQuery = "CREATE TABLE " +
                 RoutesDbContract.TABLE_NAME + "( " +
-                RoutesDbContract.COLUMN_NUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                RoutesDbContract.COLUMN_NUMBER + " INTEGER PRIMARY KEY, " +
                 RoutesDbContract.COLUMN_START_STATION_ID + " INTEGER NOT NULL, " +
                 RoutesDbContract.COLUMN_END_STATION_ID + " INTEGER NOT NULL, " +
                 RoutesDbContract.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
