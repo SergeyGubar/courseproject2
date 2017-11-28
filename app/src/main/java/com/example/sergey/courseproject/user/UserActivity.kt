@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.entities.Ticket
@@ -31,8 +32,16 @@ class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        val listOfIds = ArrayList<CharSequence>()
+        val journeys = journeysRepository.getAllJourneys(null)
+        journeys.forEach {
+            listOfIds.add(it.id.toString())
+        }
 
         // TODO : Initialize Journeys adapter
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfIds)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        select_journey_spinner.adapter = spinnerAdapter
 
         select_journey_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -51,16 +60,16 @@ class UserActivity : AppCompatActivity() {
             ticket.apply {
                 journeyId = select_journey_spinner.selectedItem.toString().toInt()
                 val journey = journeysRepository.getJourneyById(journeyId)
-                val bus = busesRepository.getBusById(journey.id)
+                val bus = busesRepository.getBusById(journey.busId)
                 val numberOfSeats = bus.numberOfSeats
                 setSeat(numberOfSeats)
             }
-
-            if (ticketRepository.addTicket(ticket) < 0) {
+            val ticketId = ticketRepository.addTicket(ticket)
+            if (ticketId < 0) {
                 Toast.makeText(this, "ticket wasn't added", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Ticket bought!", Toast.LENGTH_SHORT).show()
-
+                startActivity(TicketActivity.makeIntent(this, ticketId))
             }
 
 

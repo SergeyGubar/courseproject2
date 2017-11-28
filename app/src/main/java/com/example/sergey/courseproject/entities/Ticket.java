@@ -8,6 +8,7 @@ public class Ticket {
     private int mId;
     private int mJourneyId;
     private int mSeat;
+    private String mTimeStamp;
 
     public Ticket() {
     }
@@ -32,6 +33,14 @@ public class Ticket {
 
     public int getId() {
         return mId;
+    }
+
+    public String getTimeStamp() {
+        return mTimeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        mTimeStamp = timeStamp;
     }
 
     public int getJourneyId() {

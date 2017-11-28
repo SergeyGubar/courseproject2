@@ -9,6 +9,9 @@ import com.example.sergey.courseproject.db.contracts.JourneyDbContract;
 import com.example.sergey.courseproject.entities.Journey;
 import com.example.sergey.courseproject.helpers.SQLiteHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sgubar on 11/17/17.
  */
@@ -44,6 +47,7 @@ public class JourneyRepository {
                 null,
                 null,
                 null);
+        cursor.moveToFirst();
         Journey journey = new Journey(id,
                 cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_ROUTE_NUMBER)),
                 cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_COST)),
@@ -51,6 +55,29 @@ public class JourneyRepository {
                 cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_BUS_ID)));
         cursor.close();
         return journey;
+    }
+
+    public List<Journey> getAllJourneys(String orderBy) {
+        List<Journey> result = new ArrayList<>();
+        mDb = mHelper.getReadableDatabase();
+        Cursor cursor = mDb.query(JourneyDbContract.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                orderBy);
+
+        while (cursor.moveToNext()) {
+            Journey journey = new Journey(cursor.getInt(cursor.getColumnIndex(JourneyDbContract._ID)),
+                    cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_ROUTE_NUMBER)),
+                    cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_COST)),
+                    cursor.getString(cursor.getColumnIndex(JourneyDbContract.COLUMN_DATE)),
+                    cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_BUS_ID)));
+            result.add(journey);
+        }
+        cursor.close();
+        return result;
     }
 
 }

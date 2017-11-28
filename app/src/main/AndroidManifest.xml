@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sergey.courseproject">
+          package="com.example.sergey.courseproject">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,25 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".login.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".register.RegisterActivity" />
-        <activity android:name=".admin.AdminActivity" />
-        <activity android:name=".station.AddStationActivity" />
-        <activity android:name=".admin.buses.BusesActivity" />
-        <activity android:name=".admin.workers.WorkersActivity" />
-        <activity android:name=".admin.buses.EditBusActivity" />
-        <activity android:name=".admin.buses.AddBusActivity" />
-        <activity android:name=".admin.workers.WorkerEditActivity" />
-        <activity android:name=".cashier.CashierActivity" />
-        <activity android:name=".cashier.JourneyAddActivity" />
-        <activity android:name=".cashier.RouteAddActivity" />
-        <activity android:name=".user.UserActivity"></activity>
+        <activity android:name=".register.RegisterActivity"/>
+        <activity android:name=".admin.AdminActivity"/>
+        <activity android:name=".station.AddStationActivity"/>
+        <activity android:name=".admin.buses.BusesActivity"/>
+        <activity android:name=".admin.workers.WorkersActivity"/>
+        <activity android:name=".admin.buses.EditBusActivity"/>
+        <activity android:name=".admin.buses.AddBusActivity"/>
+        <activity android:name=".admin.workers.WorkerEditActivity"/>
+        <activity android:name=".cashier.CashierActivity"/>
+        <activity android:name=".cashier.JourneyAddActivity"/>
+        <activity android:name=".cashier.RouteAddActivity"/>
+        <activity android:name=".user.UserActivity"/>
+        <activity android:name=".user.TicketActivity">
+        </activity>
     </application>
 
 </manifest>

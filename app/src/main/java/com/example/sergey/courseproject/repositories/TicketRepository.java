@@ -2,6 +2,7 @@ package com.example.sergey.courseproject.repositories;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sergey.courseproject.db.contracts.TicketDbContract;
@@ -23,7 +24,6 @@ public class TicketRepository {
     }
 
     public long addTicket(Ticket ticket) {
-        //TODO : correct ticket add
         mDb = mHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(TicketDbContract.COLUMN_JOURNEY_ID, ticket.getJourneyId());
@@ -33,6 +33,25 @@ public class TicketRepository {
                 null,
                 cv);
 
+    }
+
+    public Ticket getTicketById(long id) {
+        mDb = mHelper.getReadableDatabase();
+        Cursor cursor = mDb.query(TicketDbContract.TABLE_NAME,
+                null,
+                TicketDbContract._ID + " = " + id,
+                null,
+                null,
+                null,
+                null);
+        cursor.moveToFirst();
+
+        Ticket ticket = new Ticket(cursor.getInt(cursor.getColumnIndex(TicketDbContract._ID)),
+                cursor.getInt(cursor.getColumnIndex(TicketDbContract.COLUMN_JOURNEY_ID)),
+                cursor.getInt(cursor.getColumnIndex(TicketDbContract.COLUMN_SEAT_NUMBER)));
+        ticket.setTimeStamp(cursor.getString(cursor.getColumnIndex(TicketDbContract.COLUMN_TIMESTAMP)));
+        cursor.close();
+        return ticket;
     }
 
 
