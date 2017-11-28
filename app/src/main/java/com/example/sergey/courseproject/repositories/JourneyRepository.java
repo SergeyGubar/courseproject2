@@ -2,6 +2,7 @@ package com.example.sergey.courseproject.repositories;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sergey.courseproject.db.contracts.JourneyDbContract;
@@ -32,6 +33,24 @@ public class JourneyRepository {
         cv.put(JourneyDbContract.COLUMN_ROUTE_NUMBER, journey.getRoute());
 
         return mDb.insert(JourneyDbContract.TABLE_NAME, null, cv);
+    }
+
+    public Journey getJourneyById(int id) {
+        mDb = mHelper.getReadableDatabase();
+        Cursor cursor = mDb.query(JourneyDbContract.TABLE_NAME,
+                null,
+                JourneyDbContract._ID + " = " + id,
+                null,
+                null,
+                null,
+                null);
+        Journey journey = new Journey(id,
+                cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_ROUTE_NUMBER)),
+                cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_COST)),
+                cursor.getString(cursor.getColumnIndex(JourneyDbContract.COLUMN_DATE)),
+                cursor.getInt(cursor.getColumnIndex(JourneyDbContract.COLUMN_BUS_ID)));
+        cursor.close();
+        return journey;
     }
 
 }

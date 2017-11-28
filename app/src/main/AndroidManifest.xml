@@ -26,7 +26,8 @@
         <activity android:name=".admin.workers.WorkerEditActivity" />
         <activity android:name=".cashier.CashierActivity" />
         <activity android:name=".cashier.JourneyAddActivity" />
-        <activity android:name=".cashier.RouteAddActivity"></activity>
+        <activity android:name=".cashier.RouteAddActivity" />
+        <activity android:name=".user.UserActivity"></activity>
     </application>
 
 </manifest>
