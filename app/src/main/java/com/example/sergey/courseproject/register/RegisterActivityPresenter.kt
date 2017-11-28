@@ -1,12 +1,10 @@
 package com.example.sergey.courseproject.register
 
 import android.content.Context
-import android.util.Log
 import android.widget.ArrayAdapter
 import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.repositories.StationRepository
 import com.example.sergey.courseproject.repositories.WorkerRepository
-import java.util.ArrayList
 
 /**
  * Created by sergey on 11/9/17.
@@ -38,7 +36,7 @@ class RegisterActivityPresenter(private val mCtx: Context, private val mApi: Reg
 
     fun initializeStationSpinner() {
         val spinner = mApi.stationsSpinner
-        val stationNames = mStationRepository.stationsNames
+        val stationNames = mStationRepository.stationIds
 
         val adapter = ArrayAdapter<CharSequence>(mCtx, android.R.layout.simple_spinner_item, stationNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

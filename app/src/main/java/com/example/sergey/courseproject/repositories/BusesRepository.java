@@ -28,6 +28,8 @@ public class BusesRepository {
         mHelper = new SQLiteHelper(ctx);
     }
 
+
+
     public List<Bus> getAllBuses() {
         mDb = mHelper.getReadableDatabase();
         List<Bus> result = new ArrayList<>();
@@ -45,8 +47,48 @@ public class BusesRepository {
                     buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_DRIVER_ID)),
                     buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_SEATS_NUMBER)),
                     buses.getString(buses.getColumnIndex(BusesDbContract.COLUMN_BRAND))
-                    );
+            );
             result.add(bus);
+        }
+        buses.close();
+        return result;
+    }
+
+    public void updateBus(Bus bus) {
+        long id = bus.getId();
+        ContentValues cv = new ContentValues();
+        cv.put(BusesDbContract._ID, id);
+        cv.put(BusesDbContract.COLUMN_STATION_ID, bus.getStationId());
+        cv.put(BusesDbContract.COLUMN_DRIVER_ID, bus.getDriverId());
+        cv.put(BusesDbContract.COLUMN_SEATS_NUMBER, bus.getNumberOfSeats());
+        cv.put(BusesDbContract.COLUMN_BRAND, bus.getBrand());
+        mDb = mHelper.getWritableDatabase();
+        mDb.update(BusesDbContract.TABLE_NAME,
+                cv,
+                BusesDbContract._ID + " = " + id,
+                null
+        );
+    }
+
+    public List<CharSequence> getAllBusesId(String orderBy) {
+        mDb = mHelper.getReadableDatabase();
+        List<CharSequence> result = new ArrayList<>();
+        Cursor buses = mDb.query(BusesDbContract.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                orderBy);
+        while (buses.moveToNext()) {
+            Bus bus = new Bus(
+                    buses.getInt(buses.getColumnIndex(BusesDbContract._ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_STATION_ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_DRIVER_ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_SEATS_NUMBER)),
+                    buses.getString(buses.getColumnIndex(BusesDbContract.COLUMN_BRAND))
+            );
+            result.add(String.valueOf(bus.getId()));
         }
         buses.close();
         return result;
@@ -57,7 +99,7 @@ public class BusesRepository {
 
         Cursor busCursor = mDb.query(BusesDbContract.TABLE_NAME,
                 null,
-                BusesDbContract._ID +  " = " + id,
+                BusesDbContract._ID + " = " + id,
                 null,
                 null,
                 null,

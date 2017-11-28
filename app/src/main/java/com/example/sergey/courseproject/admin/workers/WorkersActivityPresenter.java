@@ -22,8 +22,8 @@ public class WorkersActivityPresenter {
         mApi = api;
     }
 
-    public List<Worker> getWorkers() {
-        return mWorkerRepository.getAllWorkers();
+    public List<Worker> getWorkers(String order) {
+        return mWorkerRepository.getAllWorkers(order);
     }
 
     public void deleteWorker(long id) {
@@ -34,4 +34,15 @@ public class WorkersActivityPresenter {
         }
     }
 
+    public List<Worker> getWorkersWithRole(String role, String orderBy) {
+        return mWorkerRepository.getWorkersWithRole(role, orderBy);
+    }
+
+    public List<Worker> getWorkerWithRoleAndStation(String role, String orderByFilter, String station) {
+        return mWorkerRepository.getWorkersWithRoleAndStation(role, orderByFilter, station);
+    }
+
+    public List<Worker> getWorkersWithStation(String orderByFilter, String station) {
+        return mWorkerRepository.getWorkersWithStation(orderByFilter, station);
+    }
 }

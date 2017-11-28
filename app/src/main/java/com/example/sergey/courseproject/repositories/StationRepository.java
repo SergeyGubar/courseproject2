@@ -43,7 +43,7 @@ public class StationRepository {
     }
 
 
-    public ArrayList<CharSequence> getStationsNames() {
+    public ArrayList<CharSequence> getStationIds() {
         mDb = mHelper.getReadableDatabase();
         ArrayList<CharSequence> list = new ArrayList<>();
         Cursor stations = mDb.query(StationDbContract.TABLE_NAME,

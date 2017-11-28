@@ -34,6 +34,7 @@ class BusesActivity : AppCompatActivity(), DeleteBusCallback, EditBusCallback {
         init()
     }
 
+    // это не мое, мне подкинули
     private fun init() {
         val adapter = BusesRecyclerAdapter(this, mDeleteCallback = this, mEditCallback = this)
         val manager = LinearLayoutManager(this)

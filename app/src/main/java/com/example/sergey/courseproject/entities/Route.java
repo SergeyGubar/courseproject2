@@ -15,12 +15,27 @@ public class Route {
         mEndStationId = endStationId;
     }
 
+    public Route() {
+    }
+
     public int getNumber() {
         return mNumber;
     }
 
     public int getStartStationId() {
         return mStartStationId;
+    }
+
+    public void setNumber(int number) {
+        mNumber = number;
+    }
+
+    public void setStartStationId(int startStationId) {
+        mStartStationId = startStationId;
+    }
+
+    public void setEndStationId(int endStationId) {
+        mEndStationId = endStationId;
     }
 
     public int getEndStationId() {
