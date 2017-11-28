@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CourseProject</string>
+    <string name="user_success_add">User Succesfully Added!</string>
+    <string name="user_fail_add">User Add Failed</string>
+    <string name="login_hint">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="register_hint">Register</string>
 </resources>
