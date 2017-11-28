@@ -9,6 +9,21 @@ public class Ticket {
     private int mJourneyId;
     private int mSeat;
 
+    public Ticket() {
+    }
+
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public void setJourneyId(int journeyId) {
+        mJourneyId = journeyId;
+    }
+
+    public void setSeat(int seat) {
+        mSeat = seat;
+    }
+
     public Ticket(int id, int journeyId, int seat) {
         mId = id;
         mJourneyId = journeyId;
@@ -23,7 +38,8 @@ public class Ticket {
         return mJourneyId;
     }
 
-    public int getSeat() {
+    public int getSeatNumber() {
         return mSeat;
     }
+
 }

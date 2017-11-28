@@ -28,6 +28,8 @@ public class BusesRepository {
         mHelper = new SQLiteHelper(ctx);
     }
 
+
+
     public List<Bus> getAllBuses() {
         mDb = mHelper.getReadableDatabase();
         List<Bus> result = new ArrayList<>();
@@ -66,6 +68,30 @@ public class BusesRepository {
                 BusesDbContract._ID + " = " + id,
                 null
         );
+    }
+
+    public List<CharSequence> getAllBusesId(String orderBy) {
+        mDb = mHelper.getReadableDatabase();
+        List<CharSequence> result = new ArrayList<>();
+        Cursor buses = mDb.query(BusesDbContract.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                orderBy);
+        while (buses.moveToNext()) {
+            Bus bus = new Bus(
+                    buses.getInt(buses.getColumnIndex(BusesDbContract._ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_STATION_ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_DRIVER_ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_SEATS_NUMBER)),
+                    buses.getString(buses.getColumnIndex(BusesDbContract.COLUMN_BRAND))
+            );
+            result.add(String.valueOf(bus.getId()));
+        }
+        buses.close();
+        return result;
     }
 
     public Bus getBusById(int id) {

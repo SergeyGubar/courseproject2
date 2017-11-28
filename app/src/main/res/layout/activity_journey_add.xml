@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="YYYY-MM-DD HH:MM:SS.SSS"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Route"
+        android:layout_above="@id/journey_route_number_spinner"/>
+    <Spinner
+        android:id="@+id/journey_route_number_spinner"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/journey_route_hint"
+        android:layout_below="@id/journey_route_number_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bus"/>
+    <Spinner
+
+        android:id="@+id/journey_bus_spinner"
+        android:layout_below="@id/journey_route_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+    <EditText
+        android:id="@+id/journey_date_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:inputType="datetime"
+        android:layout_below="@id/journey_bus_spinner"
+        />
+    <EditText
+        android:id="@+id/journey_cost_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cost"
+        android:inputType="number"
+        android:layout_below="@id/journey_date_edit_text"/>
+    <Button
+        android:id="@+id/add_journey_button"
+        android:text="Add journey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/journey_cost_edit_text"
+        />
+</RelativeLayout>
