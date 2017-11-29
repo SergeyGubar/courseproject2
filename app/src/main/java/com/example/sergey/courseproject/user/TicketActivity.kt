@@ -22,7 +22,7 @@ import java.util.*
 
 class TicketActivity : AppCompatActivity() {
 
-    val ticketRepository by lazy {
+    private val ticketRepository by lazy {
         TicketRepository(this)
     }
 
@@ -58,8 +58,6 @@ class TicketActivity : AppCompatActivity() {
             sheet.addCell(Label(1, 0, TicketDbContract.COLUMN_JOURNEY_ID))
             sheet.addCell(Label(2, 0, TicketDbContract.COLUMN_SEAT_NUMBER))
             sheet.addCell(Label(3, 0, TicketDbContract.COLUMN_TIMESTAMP))
-
-
 
 
             sheet.addCell(Label(0, 1, ticket.id.toString()))

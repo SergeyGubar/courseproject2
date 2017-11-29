@@ -34,6 +34,8 @@ class RouteAddActivity : AppCompatActivity() {
 
             if(route.startStationId != route.endStationId) {
                 routesRepository.add(route)
+                Toast.makeText(this, "Route added!", Toast.LENGTH_SHORT).show()
+                route_number_edit_text.setText("")
             } else {
                 Toast.makeText(this, "Start station == end", Toast.LENGTH_SHORT).show()
             }

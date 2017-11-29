@@ -10,25 +10,27 @@ import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.entities.Ticket
 import com.example.sergey.courseproject.repositories.BusesRepository
 import com.example.sergey.courseproject.repositories.JourneyRepository
+import com.example.sergey.courseproject.repositories.RoutesRepository
 import com.example.sergey.courseproject.repositories.TicketRepository
 import kotlinx.android.synthetic.main.activity_user.*
-import kotlinx.android.synthetic.main.activity_user.view.*
 
 class UserActivity : AppCompatActivity() {
 
-    val ticketRepository by lazy {
+    private val ticketRepository by lazy {
         TicketRepository(this)
     }
 
-    val busesRepository by lazy {
+    private val busesRepository by lazy {
         BusesRepository(this)
     }
 
-    val journeysRepository by lazy {
+    private val journeysRepository by lazy {
         JourneyRepository(this)
     }
 
-
+    private val routesRepository by lazy {
+        RoutesRepository(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -51,7 +53,10 @@ class UserActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val journeyId = parent?.getItemAtPosition(position).toString().toInt()
                 val journey = journeysRepository.getJourneyById(journeyId)
-                journey_information_text_view.setText("ID : ${journey.id} Cost ${journey.cost} Date ${journey.date}")
+                journey_information_text_view.setText("ID : ${journey.id} Cost: ${journey.cost} Date: ${journey.date}")
+                val routeNumber = journey.route
+                val route = routesRepository.getRouteByNumber(routeNumber)
+                route_information_text_view.setText("Number ${route.number} Start Station: ${route.startStationId} End: ${route.endStationId}")
             }
 
         }

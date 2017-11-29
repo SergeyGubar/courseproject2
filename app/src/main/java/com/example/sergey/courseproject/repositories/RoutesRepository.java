@@ -85,4 +85,24 @@ public class RoutesRepository {
         routes.close();
         return result;
     }
+
+    public Route getRouteByNumber(int id) {
+        mDb = mHelper.getReadableDatabase();
+
+        Cursor routes = mDb.query(RoutesDbContract.TABLE_NAME,
+                null,
+                RoutesDbContract.COLUMN_NUMBER + " = " + id,
+                null,
+                null,
+                null,
+                null);
+        routes.moveToFirst();
+
+
+        Route route = new Route(routes.getInt(routes.getColumnIndex(RoutesDbContract.COLUMN_NUMBER)),
+                routes.getInt(routes.getColumnIndex(RoutesDbContract.COLUMN_START_STATION_ID)),
+                routes.getInt(routes.getColumnIndex(RoutesDbContract.COLUMN_END_STATION_ID)));
+        routes.close();
+        return route;
+    }
 }
