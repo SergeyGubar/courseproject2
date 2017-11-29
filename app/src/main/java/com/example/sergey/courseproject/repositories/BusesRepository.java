@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sergey.courseproject.db.contracts.BusesDbContract;
 import com.example.sergey.courseproject.entities.Bus;
+import com.example.sergey.courseproject.entities.Worker;
 import com.example.sergey.courseproject.helpers.SQLiteHelper;
 
 import java.util.ArrayList;
@@ -54,6 +55,31 @@ public class BusesRepository {
         return result;
     }
 
+
+    public List<Bus> getBusesForSpecificDriver(int driverId) {
+        mDb = mHelper.getReadableDatabase();
+        List<Bus> result = new ArrayList<>();
+        Cursor buses = mDb.query(BusesDbContract.TABLE_NAME,
+                null,
+                BusesDbContract.COLUMN_DRIVER_ID + " = " + driverId,
+                null,
+                null,
+                null,
+                null);
+
+        while (buses.moveToNext()) {
+            Bus bus = new Bus(
+                    buses.getInt(buses.getColumnIndex(BusesDbContract._ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_STATION_ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_DRIVER_ID)),
+                    buses.getInt(buses.getColumnIndex(BusesDbContract.COLUMN_SEATS_NUMBER)),
+                    buses.getString(buses.getColumnIndex(BusesDbContract.COLUMN_BRAND))
+            );
+            result.add(bus);
+        }
+        buses.close();
+        return result;
+    }
     public void updateBus(Bus bus) {
         long id = bus.getId();
         ContentValues cv = new ContentValues();

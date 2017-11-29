@@ -16,6 +16,8 @@ public class Worker {
     private String mEmail;
     private String mPassword;
 
+    // без комментариев
+    private boolean isHighlighted;
 
     public Worker(int id, String fullName, int personalData, int salary, int yearsExperience,
                   String telephoneNumber, int stationId, String role, String email, String password) {
@@ -45,6 +47,13 @@ public class Worker {
     }
 
 
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
+
+    public void setHighlighted(boolean highlighted) {
+        isHighlighted = highlighted;
+    }
 
     public int getId() {
         return mId;

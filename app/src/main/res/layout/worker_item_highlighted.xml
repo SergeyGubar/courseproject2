@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:background="@android:color/darker_gray"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/worker_id_text_view"
+        android:layout_width="0dp"
+        android:text="1"
+        android:layout_weight="1"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/worker_station_text_view"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="1"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/worker_role_text_view"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="admin"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/worker_full_name_text_view"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="Sergey"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

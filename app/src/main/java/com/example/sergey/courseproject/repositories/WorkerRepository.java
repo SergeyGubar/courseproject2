@@ -116,6 +116,39 @@ public class WorkerRepository {
         return result;
     }
 
+    public List<Worker> getWorkersWithNamePattern(String name) {
+        mDb = mHelper.getReadableDatabase();
+        List<Worker> result = new ArrayList<>();
+        Cursor data = mDb.query(WorkerDbContract.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+        while (data.moveToNext()) {
+            Worker worker = new Worker(
+                    data.getInt(data.getColumnIndex(WorkerDbContract._ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_FULL_NAME)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_PERSONAL_DATA)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_SALARY)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_EXPERIENCE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_TELEPHONE)),
+                    data.getInt(data.getColumnIndex(WorkerDbContract.COLUMN_STATION_ID)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_ROLE)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_EMAIL)),
+                    data.getString(data.getColumnIndex(WorkerDbContract.COLUMN_PASSWORD))
+            );
+            if(worker.getFullName().contains(name)) {
+                worker.setHighlighted(true);
+            }
+            result.add(worker);
+        }
+        data.close();
+        return result;
+    }
+
     public boolean editWorker(Worker worker) {
         mDb = mHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -162,6 +195,7 @@ public class WorkerRepository {
             );
             result.add(worker);
         }
+        data.close();
         return result;
     }
 

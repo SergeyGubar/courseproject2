@@ -20,5 +20,6 @@ class CashierActivity : AppCompatActivity() {
         routes_button.setOnClickListener {
             startActivity(Intent(this@CashierActivity, RouteAddActivity::class.java))
         }
+
     }
 }
