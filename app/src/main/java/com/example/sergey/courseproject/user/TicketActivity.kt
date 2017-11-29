@@ -1,12 +1,17 @@
 package com.example.sergey.courseproject.user
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.widget.Toast
 import com.example.sergey.courseproject.R
+import com.example.sergey.courseproject.admin.workers.WorkerEditActivity.EXTRA_KEY
 import com.example.sergey.courseproject.db.contracts.TicketDbContract
 import com.example.sergey.courseproject.repositories.TicketRepository
 import jxl.Workbook
@@ -20,6 +25,7 @@ class TicketActivity : AppCompatActivity() {
     val ticketRepository by lazy {
         TicketRepository(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ticket)
@@ -28,8 +34,12 @@ class TicketActivity : AppCompatActivity() {
 
         val ticket = ticketRepository.getTicketById(ticketId)
 
+        val permissions = Array(2, { i -> i.toString() })
+        permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE
+        permissions[1] = Manifest.permission.WRITE_EXTERNAL_STORAGE
 
-        Toast.makeText(this, ticketId.toString(), Toast.LENGTH_SHORT).show()
+        ActivityCompat.requestPermissions(this, permissions,0)
+
         val sd = Environment.getExternalStorageDirectory()
         val csvFile = "myData.xls"
 
@@ -61,7 +71,7 @@ class TicketActivity : AppCompatActivity() {
             workbook.close()
             Toast.makeText(this, "Excel report done!", Toast.LENGTH_SHORT).show()
 
-        } catch (ex : Exception) {
+        } catch (ex: Exception) {
             ex.printStackTrace()
         }
     }
