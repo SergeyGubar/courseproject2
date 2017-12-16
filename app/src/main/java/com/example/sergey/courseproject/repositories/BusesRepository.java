@@ -56,6 +56,7 @@ public class BusesRepository {
     }
 
 
+
     public List<Bus> getBusesForSpecificDriver(int driverId) {
         mDb = mHelper.getReadableDatabase();
         List<Bus> result = new ArrayList<>();
@@ -94,6 +95,20 @@ public class BusesRepository {
                 BusesDbContract._ID + " = " + id,
                 null
         );
+    }
+
+    public List<String> getAllBusesBrands() {
+        mDb = mHelper.getReadableDatabase();
+        List<String> result = new ArrayList<>();
+        String query = "SELECT DISTINCT " + BusesDbContract.COLUMN_BRAND + " FROM " + BusesDbContract.TABLE_NAME + ";";
+
+        Cursor queryResult = mDb.rawQuery(query, null);
+        while (queryResult.moveToNext()) {
+            result.add(queryResult.getString(queryResult.getColumnIndex(BusesDbContract.COLUMN_BRAND)));
+        }
+        queryResult.close();
+        return result;
+
     }
 
     public List<CharSequence> getAllBusesId(String orderBy) {
