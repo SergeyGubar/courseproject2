@@ -261,4 +261,12 @@ public class WorkerRepository {
         data.close();
         return result;
     }
+
+    public Cursor getStatByExp(int exp) {
+        mDb = mHelper.getReadableDatabase();
+        String query = "SELECT " + WorkerDbContract.COLUMN_EXPERIENCE + "," + "COUNT(" +
+                WorkerDbContract._ID + ") AS CountStat FROM " + WorkerDbContract.TABLE_NAME + " GROUP BY " +
+                WorkerDbContract.COLUMN_EXPERIENCE + " HAVING " + WorkerDbContract.COLUMN_EXPERIENCE + " > " + exp + ";";
+        return mDb.rawQuery(query, null);
+    }
 }

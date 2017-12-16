@@ -1,6 +1,7 @@
 package com.example.sergey.courseproject.register
 
 import android.widget.Spinner
+import com.example.sergey.courseproject.entities.Station
 import com.example.sergey.courseproject.entities.Worker
 
 /**
@@ -21,5 +22,7 @@ interface RegisterActivityApi {
     val worker: Worker
     
     val stationsSpinner: Spinner
+
+    fun displayStationInfo(station: Station)
 
 }

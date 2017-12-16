@@ -5,15 +5,16 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.sergey.courseproject.R
+import com.example.sergey.courseproject.entities.Station
 import com.example.sergey.courseproject.entities.Worker
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
+
     private lateinit var mPresenter: RegisterActivityPresenter
 
     override val rolesSpinner: Spinner
         get() = role_spinner
-
 
     override val stationsSpinner: Spinner
         get() = stations_spinner
@@ -24,6 +25,11 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
                 role_spinner.selectedItem.toString().toLowerCase(),
                 register_name_edit_text.text.toString(),
                 Integer.valueOf(stationsSpinner.selectedItem.toString()))
+
+    override fun displayStationInfo(station: Station) {
+        station_description_text_view.text = "Name: ${station.name} City: ${station.city}"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,7 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityApi {
         register_button.setOnClickListener {
             mPresenter.addUser()
         }
+
 
     }
 

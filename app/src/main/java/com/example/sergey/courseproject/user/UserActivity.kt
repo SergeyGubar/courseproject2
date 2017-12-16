@@ -40,7 +40,6 @@ class UserActivity : AppCompatActivity() {
             listOfIds.add(it.id.toString())
         }
 
-        // TODO : Initialize Journeys adapter
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfIds)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         select_journey_spinner.adapter = spinnerAdapter

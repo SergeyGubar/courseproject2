@@ -42,6 +42,22 @@ public class StationRepository {
         return id;
     }
 
+    public Station getStationById(int id) {
+        mDb = mHelper.getReadableDatabase();
+        Cursor response = mDb.query(StationDbContract.TABLE_NAME,
+                null,
+                StationDbContract._ID + " = " + id,
+                null,
+                null,
+                null,
+                null);
+        response.moveToFirst();
+        Station station = new Station(id, response.getString(response.getColumnIndex(StationDbContract.COLUMN_NAME)),
+                response.getString(response.getColumnIndex(StationDbContract.COLUMN_CITY)));
+        response.close();
+        return station;
+    }
+
 
     public ArrayList<CharSequence> getStationIds() {
         mDb = mHelper.getReadableDatabase();

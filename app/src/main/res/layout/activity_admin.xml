@@ -31,5 +31,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cross_query_button"
         android:text="Search drivers" />
+    <Button
+        android:id="@+id/statistics_button"
+        android:layout_above="@id/buses_btn"
+        android:text="Statistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

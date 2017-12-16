@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.example.sergey.courseproject.R;
 import com.example.sergey.courseproject.admin.buses.BusesActivity;
+import com.example.sergey.courseproject.admin.statistics.StatisticsActivity;
 import com.example.sergey.courseproject.admin.workers.cross.CrossQueryActivity;
 import com.example.sergey.courseproject.admin.workers.search.WorkerSearchActivity;
 import com.example.sergey.courseproject.admin.workers.WorkersActivity;
@@ -43,6 +44,13 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminActivity.this, WorkerSearchActivity.class));
+            }
+        });
+
+        findViewById(R.id.statistics_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminActivity.this, StatisticsActivity.class));
             }
         });
 

@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.example.sergey.courseproject.R
 import com.example.sergey.courseproject.admin.workers.WorkerEditActivity.EXTRA_KEY
 import com.example.sergey.courseproject.db.contracts.TicketDbContract
+import com.example.sergey.courseproject.repositories.JourneyRepository
 import com.example.sergey.courseproject.repositories.TicketRepository
 import jxl.Workbook
 import jxl.WorkbookSettings
@@ -26,6 +27,10 @@ class TicketActivity : AppCompatActivity() {
         TicketRepository(this)
     }
 
+    private val journeyRepository by lazy {
+        JourneyRepository(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ticket)
@@ -33,6 +38,8 @@ class TicketActivity : AppCompatActivity() {
         val ticketId = intent.extras.getBundle(EXTRA_KEY).getLong(TICKET_ID_KEY)
 
         val ticket = ticketRepository.getTicketById(ticketId)
+        val journey = journeyRepository.getJourneyById(ticket.journeyId)
+
 
         val permissions = Array(2, { i -> i.toString() })
         permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE
@@ -41,7 +48,7 @@ class TicketActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, permissions,0)
 
         val sd = Environment.getExternalStorageDirectory()
-        val csvFile = "myData.xls"
+        val csvFile = "ticket.xls"
 
         val directory = File(sd.absolutePath)
 
@@ -54,16 +61,22 @@ class TicketActivity : AppCompatActivity() {
             wbSettings.locale = Locale("en", "EN")
             val workbook = Workbook.createWorkbook(file, wbSettings)
             val sheet = workbook.createSheet("ticketList", 0)
-            sheet.addCell(Label(0, 0, TicketDbContract._ID))
-            sheet.addCell(Label(1, 0, TicketDbContract.COLUMN_JOURNEY_ID))
-            sheet.addCell(Label(2, 0, TicketDbContract.COLUMN_SEAT_NUMBER))
-            sheet.addCell(Label(3, 0, TicketDbContract.COLUMN_TIMESTAMP))
+            sheet.addCell(Label(0, 0, "Ticket id"))
+            sheet.addCell(Label(1, 0, "Journey id"))
+            sheet.addCell(Label(2, 0, "Seat"))
+            sheet.addCell(Label(3, 0, "Time of buying"))
+            sheet.addCell(Label(4, 0, "Cost"))
+            sheet.addCell(Label(5, 0, "Route"))
+
 
 
             sheet.addCell(Label(0, 1, ticket.id.toString()))
             sheet.addCell(Label(1, 1, ticket.journeyId.toString()))
             sheet.addCell(Label(2, 1, ticket.seatNumber.toString()))
             sheet.addCell(Label(3, 1, ticket.timeStamp.toString()))
+            sheet.addCell(Label(4, 1, journey.cost.toString()))
+            sheet.addCell(Label(5, 1, journey.route.toString()))
+
 
             workbook.write()
             workbook.close()
